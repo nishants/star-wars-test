@@ -1,0 +1,16 @@
+<% source     = "./features"%>
+<% smoke      = "--tags ~@regression --tags ~@core"%>
+<% core       = "--tags ~@regression --tags ~@smoke"%>
+<% tag       = "@one"%>
+<% regression = "--tags ~@core --tags ~@smoke"%>
+<% common     = "--tags ~@skip --format pretty -r #{source}"%>
+
+functional              : --tags @functional  stub=true <%= common %>
+functional-smoke        : --tags @functional  stub=true <%= common %>   <%= smoke %>
+functional-core         : --tags @functional  stub=true <%= common %>   <%= core %>
+functional-regression   : --tags @functional  stub=true <%= common %>   <%= regression %>
+
+integration             : --tags @integration           <%= common %>
+integration-smoke       : --tags @integration           <%= common %>  <%= smoke %>
+integration-core        : --tags @integration           <%= common %>  <%= core %>
+integration-regression  : --tags @integration           <%= common %>  <%= regression %>
